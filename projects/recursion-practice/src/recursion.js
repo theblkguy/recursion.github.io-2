@@ -54,7 +54,14 @@ var sumBelow = function(n, output=0) {
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
+var range = function(x, y, output=[]) {
+  if(x > y){
+    return output
+  }
+  if(x <= y){
+    output.push(x + 1) 
+  }
+  return range(x + 1, y, output)
 };
 
 // 7. Compute the exponent of a number.
