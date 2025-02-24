@@ -207,13 +207,27 @@ var reverseArr = function (arr, output = []) {
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
-var buildList = function(value, length) {
+var buildList = function(value, length, output = []) {
+  if(output.length === length){
+    return output
+  } else {
+    output.push(value)
+  }
+  return buildList(value, length, output)
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function(array, value) {
+var countOccurrence = function(array, value, output = 0) {
+  if(array.length === 0){
+    return output
+  }
+  if(array[0] === value){
+    output++
+  }
+  array.shift()
+  return countOccurrence(array, value, output)
 };
 
 // 20. Write a recursive version of map.
@@ -267,22 +281,22 @@ var capitalizeWords = function(input) {
 var capitalizeFirst = function(array) {
 };
 
-// 28. Return the sum of all even numbers in an object containing nested objects.
-// var obj1 = {
-//   a: 2,
-//   b: {b: 2, bb: {b: 3, bb: {b: 2}}},
-//   c: {c: {c: 2}, cc: 'ball', ccc: 5},
-//   d: 1,
-//   e: {e: {e: 2}, ee: 'car'}
+// // 28. Return the sum of all even numbers in an object containing nested objects.
+// // var obj1 = {
+// //   a: 2,
+// //   b: {b: 2, bb: {b: 3, bb: {b: 2}}},
+// //   c: {c: {c: 2}, cc: 'ball', ccc: 5},
+// //   d: 1,
+// //   e: {e: {e: 2}, ee: 'car'}
+// // };
+// // nestedEvenSum(obj1); // 10
+// var nestedEvenSum = function(obj) {
 // };
-// nestedEvenSum(obj1); // 10
-var nestedEvenSum = function(obj) {
-};
 
-// 29. Flatten an array containing nested arrays.
-// Example: flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
-var flatten = function(arrays) {
-};
+// // 29. Flatten an array containing nested arrays.
+// // Example: flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
+// var flatten = function(arrays) {
+// };
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
@@ -297,11 +311,11 @@ var letterTally = function(str, obj) {
 var compress = function(list) {
 };
 
-// 32. Augment every element in a list with a new value where each element is an array
-// itself.
-// Example: augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
-var augmentElements = function(array, aug) {
-};
+// // 32. Augment every element in a list with a new value where each element is an array
+// // itself.
+// // Example: augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
+// var augmentElements = function(array, aug) {
+// };
 
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
