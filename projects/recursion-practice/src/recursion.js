@@ -142,21 +142,29 @@ var palindrome = function(string) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function(x, y) {
+var multiply = function(x, y, output = 0) {
+  let num = x;
+  let times = y;
+  if(times === 0){
+    return output
+  } else {
+    output += num
+  }
+  return multiply(x, y - 1, output)
 };
 
-// 13. Write a function that divides two numbers without using the / operator  or
-// JavaScript's Math object.
-var divide = function(x, y) {
-};
+// // 13. Write a function that divides two numbers without using the / operator  or
+// // JavaScript's Math object.
+// var divide = function(x, y) {
+// };
 
-// 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
-// integers is the greatest integer that divides both x and y with no remainder.
-// Example:  gcd(4,36);  // 4
-// http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
-// https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
-var gcd = function(x, y) {
-};
+// // 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
+// // integers is the greatest integer that divides both x and y with no remainder.
+// // Example:  gcd(4,36);  // 4
+// // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
+// // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+// var gcd = function(x, y) {
+// };
 
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
@@ -164,15 +172,36 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  if(str1.length !== str2.length){
+    return false
+  }
+  if(str1.length === 0 && str2.length === 0){
+    return true
+  }
+  return compareStr(str1.substring(1), str2.substring(1))
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, output =[]){
+  if(str.length === 0){
+    return output
+  } else {
+    output.push(str.slice(0, 1))
+  }
+  return createArray(str.substring(1), output)
+
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (arr, output = []) {
+  if(arr.length === 0){
+    return output
+  } else {
+    output.push(arr[arr.length - 1])
+  }
+  arr.pop()
+  return reverseArr(arr, output)
 };
 
 // 18. Create a new array with a given value and length.
@@ -192,32 +221,32 @@ var countOccurrence = function(array, value) {
 var rMap = function(array, callback) {
 };
 
-// 21. Write a function that counts the number of times a key occurs in an object.
-// var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
-// countKeysInObj(testobj, 'r') // 1
-// countKeysInObj(testobj, 'e') // 2
-var countKeysInObj = function(obj, key) {
-};
+// // 21. Write a function that counts the number of times a key occurs in an object.
+// // var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
+// // countKeysInObj(testobj, 'r') // 1
+// // countKeysInObj(testobj, 'e') // 2
+// var countKeysInObj = function(obj, key) {
+// };
 
-// 22. Write a function that counts the number of times a value occurs in an object.
-// var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
-// countValuesInObj(testobj, 'r') // 2
-// countValuesInObj(testobj, 'e') // 1
-var countValuesInObj = function(obj, value) {
-};
+// // 22. Write a function that counts the number of times a value occurs in an object.
+// // var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
+// // countValuesInObj(testobj, 'r') // 2
+// // countValuesInObj(testobj, 'e') // 1
+// var countValuesInObj = function(obj, value) {
+// };
 
-// 23. Find all keys in an object (and nested objects) by a provided name and rename
-// them to a provided new name while preserving the value stored at that key.
-var replaceKeysInObj = function(obj, key, newKey) {
-};
+// // 23. Find all keys in an object (and nested objects) by a provided name and rename
+// // them to a provided new name while preserving the value stored at that key.
+// var replaceKeysInObj = function(obj, key, newKey) {
+// };
 
-// 24. Get the first n Fibonacci numbers.  In the Fibonacci Sequence, each subsequent
-// number is the sum of the previous two.
-// Example:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
-// fibonacci(5);  // [0, 1, 1, 2, 3, 5]
-// Note:  The 0 is not counted.
-var fibonacci = function(n) {
-};
+// // 24. Get the first n Fibonacci numbers.  In the Fibonacci Sequence, each subsequent
+// // number is the sum of the previous two.
+// // Example:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
+// // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
+// // Note:  The 0 is not counted.
+// var fibonacci = function(n) {
+// };
 
 // 25. Return the Fibonacci number located at index n of the Fibonacci sequence.
 // [0,1,1,2,3,5,8,13,21]
