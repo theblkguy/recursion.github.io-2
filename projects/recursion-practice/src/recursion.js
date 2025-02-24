@@ -55,26 +55,17 @@ var sumBelow = function(n, output=0) {
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 var range = function(x, y, output = []) {
-    if(x < y){
-    step = 1;
-    
-    if(x + step > y - step){
-      return output
-    } else {
-      output.push(x + step)
-    }
-
-  } 
-  if (y < x){
-    step = -1
-    
-    if(x - step > y + step){
-      return output
-    } else {
-      output.push(x - step)
-    }
+  if(x === y - 1 || x === y || x - 1 === y){
+    return output
   }
-  return range(x + step, y, output)
+  if(x < y){
+    output.push(x + 1)
+    return range (x + 1, y, output)
+
+  } else if (y < x){
+    output.push(x - 1)
+    return range(x - 1, y, output)
+  }
 }
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -85,8 +76,8 @@ var exponent = function(base, exp) {
   if(exp === 0){
     return 1
   } 
-
     return base * exponent(base, exp - 1)
+
 };
 
 // 8. Determine if a number is a power of two.
@@ -382,13 +373,25 @@ var minimizeZeroes = function(arr, output=[]) {
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function(array) {
+var alternateSign = function(arr, output=[]) {
+  if(arr.length === 0){
+    return output
+  }
+  if(Math.sign(arr[0]) === 1 && Math.sign(arr[1]) === 1){
+    output.push(arr[0])
+    arr[1] = arr[1] * -1
+  } 
+  if(Math.sign(arr[0]) === -1 && Math.sign(arr[1]) === 1) {
+    output.push(arr[0])
+  }
+  return alternateSign(arr.slice(1), output)
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {
+var numToText = function(str, output=[]) {
+
 };
 
 // *** EXTRA CREDIT ***
