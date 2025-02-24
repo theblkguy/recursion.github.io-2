@@ -328,7 +328,16 @@ var capitalizeFirst = function(array, output=[]) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, output = {}) {
+  if(str.length === 0){
+    return output
+  }
+  if(!output.hasOwnProperty(str.substring(0, 1))){
+    output[str.substring(0, 1)] = 1
+  } else if (output.hasOwnProperty(str.substring(0, 1))) {
+    output[str.substring(0, 1)] += 1
+  }
+  return letterTally(str.substring(1), output)
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
