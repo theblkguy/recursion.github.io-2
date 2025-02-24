@@ -366,7 +366,16 @@ var compress = function(list, output = []) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function(array) {
+var minimizeZeroes = function(arr, output=[]) {
+  if(arr.length === 0) {
+    return output
+  }
+  if(arr[0] !== 0){
+    output.push(arr[0])
+  } else if (arr[0] === 0 && arr[1] !== 0){
+    output.push(arr[0])
+  }
+  return minimizeZeroes(arr.slice(1), output)
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
