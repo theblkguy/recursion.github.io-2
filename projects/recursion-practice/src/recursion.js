@@ -73,27 +73,31 @@ var range = function(x, y, output = []) {
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
-  if(exp === 0){
-    return 1
-  } 
-    return base * exponent(base, exp - 1)
-
+  if (exp === 0) {
+      return 1;
+  } else if (exp > 0) {
+      return base * exponent(base, exp - 1);
+  } else {
+      return 1 / exponent(base, -exp);
+  }
 };
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
-var powerOfTwo = function(n, output = true) {
-  let num = n / 2
-  //base
-  if(num === 1){
-    return output
+var powerOfTwo = function(n) {
+//base
+  if(n === 1){
+    return true
   }
-  if(num % 2 !== 0 && num !== 1) {
-    return output = false
+  if(n === 0){
+    return false
   }
-  return powerOfTwo(n - 1, output)
+  if(n % 2 !== 0){
+    return false
+  }
+  return powerOfTwo(n / 2)
 }
 
 // 9. Write a function that accepts a string a reverses it.
@@ -133,15 +137,14 @@ var palindrome = function(string) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function(x, y, output = 0) {
-  let num = x;
-  let times = y;
-  if(times === 0){
-    return output
+var multiply = function(x, y) {
+  if (y === 0) {
+      return 0;
+  } else if (y > 0) {
+      return x + multiply(x, y - 1);
   } else {
-    output += num
+      return -multiply(x, -y);
   }
-  return multiply(x, y - 1, output)
 };
 
 // // 13. Write a function that divides two numbers without using the / operator  or
@@ -163,13 +166,13 @@ var multiply = function(x, y, output = 0) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
-  if(str1.length !== str2.length){
-    return false
+  if (str1.length === 0 && str2.length === 0) {
+      return true;
   }
-  if(str1.length === 0 && str2.length === 0){
-    return true
+  if (str1[0] !== str2[0]) {
+      return false;
   }
-  return compareStr(str1.substring(1), str2.substring(1))
+  return compareStr(str1.substring(1), str2.substring(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -373,27 +376,47 @@ var minimizeZeroes = function(arr, output=[]) {
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function(arr, output=[]) {
-  if(arr.length === 0){
-    return output
+var alternateSign = function(arr, output = []) {
+  if (arr.length === 0) {
+      return output;
   }
-  if(Math.sign(arr[0]) === 1 && Math.sign(arr[1]) === 1){
-    output.push(arr[0])
-    arr[1] = arr[1] * -1
-  } 
-  if(Math.sign(arr[0]) === -1 && Math.sign(arr[1]) === 1) {
-    output.push(arr[0])
+  let num = Math.abs(arr[0]); // ensure the number is positive
+  if (output.length % 2 === 0) {
+      output.push(num);
+  } else {
+      output.push(-num);
   }
-  return alternateSign(arr.slice(1), output)
+  return alternateSign(arr.slice(1), output);
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str, output=[]) {
+var numToText = function(str, output = '') {
+  const obj = {
+      1: 'one',
+      2: 'two',
+      3: 'three',
+      4: 'four',
+      5: 'five',
+      6: 'six',
+      7: 'seven',
+      8: 'eight',
+      9: 'nine',
+      0: 'zero'
+  };
+  if (str.length === 0) {
+      return output;
+  }
 
+  if (obj[str[0]]) {
+      output += obj[str[0]];
+  } else {
+      output += str[0];
+  }
+
+  return numToText(str.slice(1), output);
 };
-
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.
